@@ -13,6 +13,10 @@ public record Executable(Path path) implements Command {
     public void execute(Shell shell, String[] arguments) {
         try {
             System.out.println(Arrays.toString(arguments));
+
+            String[] args = arguments[1].split(" ");
+
+            System.out.println(Arrays.toString(args));
             final var commandArguments = Stream
                     .concat(
                             Stream.of(path.toString()),
