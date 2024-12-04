@@ -7,7 +7,9 @@ import command.builtin.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class Shell {
@@ -52,23 +54,26 @@ public class Shell {
     }
 
     public static String[] parse(String line) {
-        final var result = line.split(" ", 2);
+        final var args = line.split(" ", 2);
+        var arguments = new ArrayList<String>();
 
-        System.out.println(Arrays.toString(result));
+        for (var arg : args) {
+            if (arg.startsWith("'")) {
+                arg = singleQuotes(arg);
+            } else if (arg.startsWith("\"")) {
+                arg = doubleQuotes(arg);
+            } else if (arg.contains("\\")) {
+                arg = blackSlash(arg);
+            } else {
+                arg = arg.replaceAll("\\s+", " ");
+            }
 
-        if (line.startsWith("'")) {
-            line = singleQuotes(line);
-        } else if (line.startsWith("\"")) {
-            line = doubleQuotes(line);
-        } else if (line.contains("\\")) {
-            line = blackSlash(line);
-        } else {
-            line = line.replaceAll("\\s+", " ");
+            arguments.add(arg);
         }
 
-        System.out.println(line);
+        System.out.println(arguments);
 
-        return result;
+        return args;
     }
 
     private static String singleQuotes(String message) {
