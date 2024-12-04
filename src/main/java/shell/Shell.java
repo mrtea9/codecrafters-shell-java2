@@ -53,8 +53,71 @@ public class Shell {
     public static String[] parse(String line) {
         final var result = line.split(" ");
 
+        if (line.startsWith("'")) {
+            line = singleQuotes(line);
+        } else if (line.startsWith("\"")) {
+            line = doubleQuotes(line);
+        } else if (line.contains("\\")) {
+            line = blackSlash(line);
+        } else {
+            line = line.replaceAll("\\s+", " ");
+        }
+
         System.out.println(line);
 
         return result;
+    }
+
+    private static String singleQuotes(String message) {
+        return message.substring(1, message.length() - 1);
+    }
+
+    private static String doubleQuotes(String message) {
+        StringBuilder sb = new StringBuilder();
+        boolean startDouble = false;
+
+        for (int i = 0; i < message.length(); i++) {
+            final var firstChar = message.charAt(i);
+
+            if (!startDouble && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
+
+            if (startDouble && firstChar == '"') {
+                startDouble = false;
+                continue;
+            }
+
+            if (firstChar == '"') {
+                startDouble = true;
+                continue;
+            }
+
+            if (firstChar == '\\' && message.charAt(i + 1) != ' ') {
+                sb.append(message.charAt(i + 1));
+                i++;
+                continue;
+            }
+
+            sb.append(firstChar);
+        }
+
+        return sb.toString();
+    }
+
+    private static String blackSlash(String message) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < message.length(); i++) {
+            final var firstChar = message.charAt(i);
+
+            if (firstChar == '\\') {
+                sb.append(message.charAt(i + 1));
+                i++;
+                continue;
+            }
+
+            sb.append(firstChar);
+        }
+
+        return sb.toString();
     }
 }
