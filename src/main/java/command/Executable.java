@@ -27,6 +27,8 @@ public record Executable(Path path) implements Command {
                     command = command.replaceAll(",", "");
                 }
 
+                System.out.println(command);
+
                 finalCommandArguments.add(command);
             }
 
