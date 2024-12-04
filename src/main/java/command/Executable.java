@@ -12,7 +12,6 @@ public record Executable(Path path) implements Command {
     @Override
     public void execute(Shell shell, String[] arguments) {
         try {
-
             final var commandArguments = Stream
                     .concat(
                             Stream.of(path.toString()),

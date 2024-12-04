@@ -49,4 +49,12 @@ public class Shell {
         workingDirectory = path;
         return true;
     }
+
+    public static String[] parse(String line) {
+        final var result = line.split(" ");
+
+        System.out.println(line);
+
+        return result;
+    }
 }
