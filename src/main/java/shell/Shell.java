@@ -70,10 +70,9 @@ public class Shell {
 
             arguments.add(arg);
         }
+        String[] result = new String[arguments.size()];
 
-        System.out.println(arguments);
-
-        return args;
+        return arguments.toArray(result);
     }
 
     private static String singleQuotes(String message) {
