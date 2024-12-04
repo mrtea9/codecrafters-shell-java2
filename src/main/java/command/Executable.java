@@ -3,6 +3,7 @@ package command;
 import shell.Shell;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -19,7 +20,15 @@ public record Executable(Path path) implements Command {
                     )
                     .toList();
 
-            System.out.println(commandArguments);
+            final var finalCommandArguments = new ArrayList<String>();
+
+            for (String command : commandArguments) {
+                if (command.startsWith("'")) command.replace("'", "").replace(",", "");
+
+                finalCommandArguments.add(command);
+            }
+
+            System.out.println(finalCommandArguments);
 
             final var process = new ProcessBuilder(commandArguments)
                     .inheritIO()
