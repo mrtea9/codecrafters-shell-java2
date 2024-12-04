@@ -5,7 +5,7 @@ import shell.Shell;
 
 import java.nio.file.Path;
 
-public enum Cd implements Command {
+public enum Cd implements Builtin {
 
     INSTANCE;
 

@@ -18,7 +18,7 @@ public class Shell {
             "echo", Echo.INSTANCE,
             "type", Type.INSTANCE,
             "pwd", Pwd.INSTANCE,
-            "cd", Cd.INSTANCE,
+            "cd", Cd.INSTANCE
     );
 
     private Path workingDirectory = Path.of(".").toAbsolutePath().normalize();
