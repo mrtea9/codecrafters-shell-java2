@@ -24,7 +24,7 @@ public record Executable(Path path) implements Command {
 
             for (String command : commandArguments) {
                 if (command.startsWith("'")) {
-                    command = command.replaceAll("'", "");
+                    command = command.replaceAll(",", "");
                 }
 
                 finalCommandArguments.add(command);
