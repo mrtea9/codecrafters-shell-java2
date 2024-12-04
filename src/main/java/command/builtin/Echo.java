@@ -12,16 +12,16 @@ public enum Echo implements Builtin {
     @Override
     public void execute(Shell shell, String[] arguments) {
         var line = Arrays.stream(arguments).skip(1).collect(Collectors.joining(" "));
-
-        if (line.startsWith("'")) {
-            line = singleQuotes(line);
-        } else if (line.startsWith("\"")) {
-            line = doubleQuotes(line);
-        } else if (line.contains("\\")) {
-            line = blackSlash(line);
-        } else {
-            line = line.replaceAll("\\s+", " ");
-        }
+//
+//        if (line.startsWith("'")) {
+//            line = singleQuotes(line);
+//        } else if (line.startsWith("\"")) {
+//            line = doubleQuotes(line);
+//        } else if (line.contains("\\")) {
+//            line = blackSlash(line);
+//        } else {
+//            line = line.replaceAll("\\s+", " ");
+//        }
 
         System.out.println(line);
     }
