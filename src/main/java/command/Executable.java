@@ -12,12 +12,15 @@ public record Executable(Path path) implements Command {
     @Override
     public void execute(Shell shell, String[] arguments) {
         try {
+            System.out.println(Arrays.toString(arguments));
             final var commandArguments = Stream
                     .concat(
                             Stream.of(path.toString()),
                             Arrays.stream(arguments).skip(1)
                     )
                     .toList();
+
+            System.out.println(commandArguments);
 
             final var process = new ProcessBuilder(commandArguments)
                     .inheritIO()
