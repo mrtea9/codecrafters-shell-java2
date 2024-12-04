@@ -1,6 +1,7 @@
 package shell;
 
 import command.Command;
+import command.Executable;
 import command.builtin.Builtin;
 import command.builtin.Echo;
 import command.builtin.Exit;
@@ -26,17 +27,21 @@ public class Shell {
     public Command find(String program) {
         final var builtin = builtins.get(program);
         if (builtin != null) return builtin;
-//
-//        final var separator = IS_WINDOWS ? ";" : ":";
-//        final var paths = System.getenv("PATH").split(separator);
-//
-//        for (final var directory : paths) {
-//            final var path = Paths.get(directory, program).normalize().toAbsolutePath();
-//
-//            if (Files.exists(path))
-//        }
+
+        final var separator = IS_WINDOWS ? ";" : ":";
+        final var paths = System.getenv("PATH").split(separator);
+
+        for (final var directory : paths) {
+            final var path = Paths.get(directory, program).normalize().toAbsolutePath();
+
+            if (Files.exists(path)) return new Executable(path);
+        }
 
         return null;
+    }
+
+    public Path getWorkingDirectory() {
+        return workingDirectory;
     }
 
     public boolean changeWorkingDirectory(Path path) {
