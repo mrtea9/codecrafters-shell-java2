@@ -2,6 +2,7 @@ package shell;
 
 import command.Command;
 import command.builtin.Builtin;
+import command.builtin.Echo;
 import command.builtin.Exit;
 
 import java.nio.file.Files;
@@ -14,7 +15,8 @@ public class Shell {
     public static final boolean IS_WINDOWS = System.getProperty("os.name").startsWith("Windows");
 
     public final Map<String, Builtin> builtins = Map.of(
-            "exit", Exit.INSTANCE
+            "exit", Exit.INSTANCE,
+            "echo", Echo.INSTANCE
     );
 
     private Path workingDirectory = Path.of(".").toAbsolutePath().normalize();
