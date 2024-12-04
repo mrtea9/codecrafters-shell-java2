@@ -23,7 +23,9 @@ public record Executable(Path path) implements Command {
             final var finalCommandArguments = new ArrayList<String>();
 
             for (String command : commandArguments) {
-                if (command.startsWith("'")) command = command.replaceAll("'", "").replaceAll(",", "");
+                if (command.startsWith("'")) {
+                    command = command.replaceAll("'", "");
+                }
 
                 finalCommandArguments.add(command);
             }
