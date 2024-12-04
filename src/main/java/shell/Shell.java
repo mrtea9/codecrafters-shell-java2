@@ -52,10 +52,11 @@ public class Shell {
     }
 
     public static String[] parse(String line) {
-        final var args = line.split(" ", 2);
-        var arguments = new ArrayList<String>();
 
-        for (var arg : args) {
+        var arguments = new ArrayList<String>();
+        String arg = line;
+
+        for (int i = 0; i < line.length(); i++) {
             if (arg.startsWith("'")) {
                 arg = singleQuotes(arg);
             } else if (arg.startsWith("\"")) {
@@ -66,8 +67,11 @@ public class Shell {
                 arg = arg.replaceAll("\\s+", " ");
             }
 
+            System.out.println(arg);
+
             arguments.add(arg);
         }
+
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
