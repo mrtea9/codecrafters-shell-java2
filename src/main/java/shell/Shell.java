@@ -2,10 +2,7 @@ package shell;
 
 import command.Command;
 import command.Executable;
-import command.builtin.Builtin;
-import command.builtin.Echo;
-import command.builtin.Exit;
-import command.builtin.Type;
+import command.builtin.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +16,8 @@ public class Shell {
     public final Map<String, Builtin> builtins = Map.of(
             "exit", Exit.INSTANCE,
             "echo", Echo.INSTANCE,
-            "type", Type.INSTANCE
+            "type", Type.INSTANCE,
+            "pwd", Pwd.INSTANCE
     );
 
     private Path workingDirectory = Path.of(".").toAbsolutePath().normalize();
