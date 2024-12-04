@@ -7,6 +7,7 @@ import command.builtin.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Map;
 
 public class Shell {
@@ -51,7 +52,9 @@ public class Shell {
     }
 
     public static String[] parse(String line) {
-        final var result = line.split(" ");
+        final var result = line.split(" ", 2);
+
+        System.out.println(Arrays.toString(result));
 
         if (line.startsWith("'")) {
             line = singleQuotes(line);
