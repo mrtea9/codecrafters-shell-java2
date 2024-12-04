@@ -19,6 +19,8 @@ public enum Echo implements Builtin {
             line = doubleQuotes(line);
         } else if (line.contains("\\")) {
             line = blackSlash(line);
+        } else {
+            line = line.replaceAll("\\s+", " ");
         }
 
         System.out.println(line);
