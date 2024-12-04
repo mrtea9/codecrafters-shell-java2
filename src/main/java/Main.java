@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void eval(Shell shell, String line) {
-        final var arguments = line.split("(?<=')\\\\s+(?=')");
+        final var arguments = line.split("");
         final var program = arguments[0];
 
         final var command = shell.find(program);
