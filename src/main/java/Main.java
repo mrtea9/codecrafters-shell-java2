@@ -27,7 +27,7 @@ public class Main {
     }
 
     public static void eval(Shell shell, String line) {
-        final var arguments = line.split(" ");
+        final var arguments = parse(line);
         final var program = arguments[0];
 
         final var command = shell.find(program);
@@ -36,5 +36,11 @@ public class Main {
         } else {
             System.out.println("%s: command not found".formatted(program));
         }
+    }
+
+    private static String[] parse(String line) {
+        final var result = line.split(" ");
+
+        return result;
     }
 }

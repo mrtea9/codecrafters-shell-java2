@@ -20,20 +20,6 @@ public record Executable(Path path) implements Command {
                     )
                     .toList();
 
-            final var finalCommandArguments = new ArrayList<String>();
-
-            for (String command : commandArguments) {
-                if (command.startsWith("'")) {
-                    command = command.replaceAll(",", "");
-                }
-
-                System.out.println(command);
-
-                finalCommandArguments.add(command);
-            }
-
-            System.out.println(finalCommandArguments);
-
             final var process = new ProcessBuilder(commandArguments)
                     .inheritIO()
                     .directory(shell.getWorkingDirectory().toFile())
