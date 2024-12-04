@@ -11,7 +11,13 @@ public enum Type implements Builtin {
     @Override
     public void execute(Shell shell, String[] arguments) {
         final var program = arguments[1];
-        System.out.println(Arrays.toString(arguments));
+        final var command = shell.find(program);
+
+        if (command instanceof Builtin) {
+            System.out.println("%s is a shell builtin".formatted(program));
+        } else {
+            System.out.println("%s not found".formatted(program));
+        }
     }
 
 }
