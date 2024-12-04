@@ -8,8 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 public class Shell {
@@ -76,7 +74,34 @@ public class Shell {
     }
 
     private static String singleQuotes(String message) {
-        return message.substring(1, message.length() - 1);
+        StringBuilder sb = new StringBuilder();
+        boolean startSingle = false;
+
+        for (int i = 0; i < message.length(); i++) {
+            final var firstChar = message.charAt(i);
+
+            if (!startSingle && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
+
+            if (startSingle && firstChar == '\'') {
+                startSingle = false;
+                continue;
+            }
+
+            if (firstChar == '\'') {
+                startSingle = true;
+                continue;
+            }
+
+            if (firstChar == '\\' && message.charAt(i + 1) != ' ') {
+                sb.append(message.charAt(i + 1));
+                i++;
+                continue;
+            }
+
+            sb.append(firstChar);
+        }
+
+        return sb.toString();
     }
 
     private static String doubleQuotes(String message) {
