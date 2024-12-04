@@ -14,7 +14,7 @@ public record Executable(Path path) implements Command {
         try {
             System.out.println(Arrays.toString(arguments));
 
-            String[] args = arguments[1].split(" ");
+            String[] args = arguments[1].split(" /");
 
             System.out.println(Arrays.toString(args));
             final var commandArguments = Stream
