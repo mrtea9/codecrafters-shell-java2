@@ -13,6 +13,7 @@ public enum Echo implements Builtin {
     public void execute(Shell shell, String[] arguments) {
         final var line = Arrays.stream(arguments).skip(1).collect(Collectors.joining(" "));
 
+
         System.out.println(line);
     }
 }
