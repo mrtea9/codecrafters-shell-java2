@@ -92,8 +92,6 @@ public class Shell {
             arguments.add(match);
         }
 
-        System.out.println(arguments);
-
         return arguments;
     }
 
