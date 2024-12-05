@@ -12,19 +12,13 @@ public record Executable(Path path) implements Command {
     @Override
     public void execute(Shell shell, String[] arguments) {
         try {
-            System.out.println(Arrays.toString(arguments));
 
-            String[] args = arguments[1].split("[^ ] [^ ]");
-
-            System.out.println(Arrays.toString(args));
             final var commandArguments = Stream
                     .concat(
                             Stream.of(path.toString()),
-                            Arrays.stream(args).skip(1)
+                            Arrays.stream(arguments).skip(1)
                     )
                     .toList();
-
-            System.out.println(commandArguments);
 
             final var process = new ProcessBuilder(commandArguments)
                     .inheritIO()
