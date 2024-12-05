@@ -64,8 +64,7 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-
-        final var commandArguments = (command.equals("cat") || command.startsWith("'") || command.startsWith("\"") )
+        final var commandArguments = (command.equals("cat") || command.length() > 6)
                 ? parseCatArguments(line) : parseArguments(line);
 
         arguments.add(command);
