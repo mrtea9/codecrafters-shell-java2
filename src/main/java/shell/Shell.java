@@ -69,8 +69,11 @@ public class Shell {
             }
 
             System.out.println(arg);
+            System.out.println(line);
 
             line = line.substring(arg.length());
+
+            System.out.println(line);
 
             arguments.add(arg);
         }
