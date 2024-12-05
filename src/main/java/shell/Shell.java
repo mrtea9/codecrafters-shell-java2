@@ -62,8 +62,6 @@ public class Shell {
         arguments.add(command);
         arguments.addAll(commandArguments);
 
-        System.out.println(arguments);
-
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
