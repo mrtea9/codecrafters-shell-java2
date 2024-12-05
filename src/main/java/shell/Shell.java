@@ -98,7 +98,7 @@ public class Shell {
     private static List<String> parseArguments(String line) {
         String arg;
         List<String> commandArguments = new ArrayList<>();
-        System.out.println(line);
+        //System.out.println(line);
 
         while (!line.isEmpty()) {
             if (line.startsWith("'")) {
