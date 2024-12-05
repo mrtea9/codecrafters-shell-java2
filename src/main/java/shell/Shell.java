@@ -221,8 +221,6 @@ public class Shell {
                 continue;
             }
 
-            if (!startDouble) continue;
-
             sb.append(firstChar);
         }
 
