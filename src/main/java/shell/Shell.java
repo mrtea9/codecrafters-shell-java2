@@ -169,12 +169,6 @@ public class Shell {
                 continue;
             }
 
-            if (firstChar == '\\' && message.charAt(i + 1) != ' ') {
-                sb.append(message.charAt(i + 1));
-                i++;
-                continue;
-            }
-
             sb.append(firstChar);
         }
 
