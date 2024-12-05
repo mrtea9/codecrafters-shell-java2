@@ -60,7 +60,9 @@ public class Shell {
         } else {
             line = line.substring(command.length() + 1);
         }
-        final var commandArguments = parseArguments(line);
+
+
+        final var commandArguments = command.equals("cat") ? parseCatArguments(line) : parseArguments(line);
 
         arguments.add(command);
         arguments.addAll(commandArguments);
@@ -69,6 +71,30 @@ public class Shell {
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
+    }
+
+    private static List<String> parseCatArguments(String line) {
+        String arg;
+        List<String> commandArguments = new ArrayList<>();
+
+        while (!line.isEmpty()) {
+            if (line.startsWith("'")) {
+                arg = singleQuotes(line);
+                line = line.substring(arg.length() + 2);
+            } else if (line.startsWith("\"")) {
+                arg = doubleQuotes(line);
+                line = line.substring(arg.length() + 2);
+            } else {
+                arg = line.replaceAll("\\s+", " ");
+                arg = simpleLine(arg);
+                if (arg.length() == line.length()) line = line.substring(arg.length());
+                else line = line.substring(arg.length() +  1);
+            }
+
+            if (!arg.isEmpty()) commandArguments.add(arg);
+        }
+
+        return commandArguments;
     }
 
     private static List<String> parseArguments(String line) {
