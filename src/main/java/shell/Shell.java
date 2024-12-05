@@ -201,7 +201,6 @@ public class Shell {
 
             sb.append(firstChar);
         }
-
         return sb.toString();
     }
 
