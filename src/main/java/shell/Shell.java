@@ -84,6 +84,8 @@ public class Shell {
         );
         Matcher matcher = pattern.matcher(line);
 
+        System.out.println(line);
+
         while (matcher.find()) {
             String match = matcher.group();
             if (match.startsWith("\"") && match.endsWith("\"")) {
