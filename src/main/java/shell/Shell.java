@@ -62,7 +62,6 @@ public class Shell {
         }
 
         final var commandArguments = parseArguments(line);
-
         arguments.add(command);
         arguments.addAll(commandArguments);
 
