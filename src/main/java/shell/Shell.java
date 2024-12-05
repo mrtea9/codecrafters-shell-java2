@@ -10,6 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Shell {
 
@@ -61,12 +63,10 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-
         final var commandArguments = command.equals("cat") ? parseCatArguments(line) : parseArguments(line);
 
         arguments.add(command);
         arguments.addAll(commandArguments);
-
 
         String[] result = new String[arguments.size()];
 
@@ -74,27 +74,27 @@ public class Shell {
     }
 
     private static List<String> parseCatArguments(String line) {
-        String arg;
-        List<String> commandArguments = new ArrayList<>();
+        List<String> arguments = new ArrayList<>();
+        Pattern pattern = Pattern.compile(
+                "\"(\\\\.|[^\"])*\"|'(\\\\.|[^'])*'|\\S+"
+        );
+        Matcher matcher = pattern.matcher(line);
 
-        while (!line.isEmpty()) {
-            if (line.startsWith("'")) {
-                arg = singleQuotes(line);
-                line = line.substring(arg.length() + 2);
-            } else if (line.startsWith("\"")) {
-                arg = doubleQuotes(line);
-                line = line.substring(arg.length() + 2);
-            } else {
-                arg = line.replaceAll("\\s+", " ");
-                arg = simpleLine(arg);
-                if (arg.length() == line.length()) line = line.substring(arg.length());
-                else line = line.substring(arg.length() +  1);
+        while (matcher.find()) {
+            String match = matcher.group();
+            if (match.startsWith("\"") && match.endsWith("\"")) {
+                // Keep escaped characters and remove surrounding double quotes
+                match = match.substring(1, match.length() - 1).replace("\\\"", "\"");
+            } else if (match.startsWith("'") && match.endsWith("'")) {
+                // Keep escaped characters and remove surrounding single quotes
+                match = match.substring(1, match.length() - 1).replace("\\'", "'");
             }
-
-            if (!arg.isEmpty()) commandArguments.add(arg);
+            arguments.add(match);
         }
 
-        return commandArguments;
+        System.out.println(arguments);
+
+        return arguments;
     }
 
     private static List<String> parseArguments(String line) {
