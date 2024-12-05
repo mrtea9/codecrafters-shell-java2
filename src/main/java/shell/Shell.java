@@ -66,12 +66,8 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-        System.out.println(line);
-
         final var commandArguments = (command.equals("cat") || command.length() > 6)
                 ? parseCatArguments(line) : parseArguments(line);
-
-        System.out.println(commandArguments);
 
         arguments.add(command);
         arguments.addAll(commandArguments);
@@ -87,8 +83,6 @@ public class Shell {
                 "\"(\\\\.|[^\"])*\"|'(\\\\.|[^'])*'|\\S+"
         );
         Matcher matcher = pattern.matcher(line);
-
-        System.out.println(line);
 
         while (matcher.find()) {
             String match = matcher.group();
