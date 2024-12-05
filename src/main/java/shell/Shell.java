@@ -60,14 +60,11 @@ public class Shell {
         } else {
             line = line.substring(command.length() + 1);
         }
-
         final var commandArguments = parseArguments(line);
-        //System.out.println(command);
-        //System.out.println(commandArguments);
+
         arguments.add(command);
         arguments.addAll(commandArguments);
 
-        //System.out.println(arguments);
 
         String[] result = new String[arguments.size()];
 
@@ -87,7 +84,6 @@ public class Shell {
                 line = line.substring(arg.length() + 2);
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
-                line = line.substring(arg.length() + 1);
                 commandArguments.add(arg);
                 return commandArguments;
             } else {
@@ -110,13 +106,9 @@ public class Shell {
             command = singleQuotes(line);
         } else if (line.startsWith("\"")) {
             command = doubleQuotes(line);
-//        } else if (line.contains("\\")) {
-//            command = blackSlash(line);
         } else {
             command = simpleLine(line);
         }
-
-        //System.out.println(command);
 
         return command;
     }
