@@ -63,7 +63,8 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-        final var commandArguments = command.equals("cat") ? parseCatArguments(line) : parseArguments(line);
+
+        final var commandArguments = (command.equals("cat") || command.startsWith("'") || command.startsWith("\"") ) ? parseCatArguments(line) : parseArguments(line);
 
         arguments.add(command);
         arguments.addAll(commandArguments);
@@ -101,10 +102,8 @@ public class Shell {
 
         if (line.startsWith("'")) {
             arg = singleQuotes(line);
-            line = line.substring(arg.length() + 2);
         } else if (line.startsWith("\"")) {
             arg = doubleQuotes(line);
-            line = line.substring(arg.length());
         } else if (line.contains("\\")) {
             arg = blackSlash(line);
         } else {
