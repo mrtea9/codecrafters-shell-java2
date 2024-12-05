@@ -71,7 +71,7 @@ public class Shell {
             System.out.println(arg);
             System.out.println(line);
 
-            line = line.substring(arg.length());
+            line = line.substring(arg.length() + 1);
 
             System.out.println(line);
 
@@ -85,7 +85,6 @@ public class Shell {
 
     private static String simpleLine(String message) {
         StringBuilder sb = new StringBuilder();
-        boolean startSingle = false;
 
         for (int i = 0; i < message.length(); i++) {
             final var firstChar = message.charAt(i);
