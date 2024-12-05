@@ -68,7 +68,10 @@ public class Shell {
             } else {
                 arg = line.replaceAll("\\s+", " ");
                 arg = simpleLine(arg);
+                System.out.println(arg);
+                System.out.println(line);
                 line = line.substring(arg.length() + 1);
+                System.out.println(line);
             }
 
             arguments.add(arg);
