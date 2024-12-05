@@ -66,7 +66,6 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-
         final var commandArguments = (command.equals("cat") || command.length() > 6)
                 ? parseCatArguments(line) : parseArguments(line);
 
@@ -189,9 +188,11 @@ public class Shell {
                 continue;
             }
 
+            if (!startDouble) continue;
 
             sb.append(firstChar);
         }
+
         return sb.toString();
     }
 
