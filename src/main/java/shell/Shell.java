@@ -66,7 +66,6 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-        System.out.println(command);
 
         final var commandArguments = (command.equals("cat") || command.length() > 6)
                 ? parseCatArguments(line) : parseArguments(line);
