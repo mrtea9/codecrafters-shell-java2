@@ -98,20 +98,18 @@ public class Shell {
     private static List<String> parseArguments(String line) {
         String arg;
         List<String> commandArguments = new ArrayList<>();
-        //System.out.println(line);
 
-
-            if (line.startsWith("'")) {
-                arg = singleQuotes(line);
-                line = line.substring(arg.length() + 2);
-            } else if (line.startsWith("\"")) {
-                arg = doubleQuotes(line);
-                line = line.substring(arg.length());
-            } else if (line.contains("\\")) {
-                arg = blackSlash(line);
-            } else {
-                arg = line.replaceAll("\\s+", " ");
-            }
+        if (line.startsWith("'")) {
+            arg = singleQuotes(line);
+            line = line.substring(arg.length() + 2);
+        } else if (line.startsWith("\"")) {
+            arg = doubleQuotes(line);
+            line = line.substring(arg.length());
+        } else if (line.contains("\\")) {
+            arg = blackSlash(line);
+        } else {
+            arg = line.replaceAll("\\s+", " ");
+        }
 
         commandArguments.add(arg);
         return commandArguments;
