@@ -95,7 +95,7 @@ public class Shell {
 
             if (startSingle && firstChar == '\'') {
                 startSingle = false;
-                continue;
+                return sb.toString();
             }
 
             if (firstChar == '\'') {
