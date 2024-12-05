@@ -87,7 +87,9 @@ public class Shell {
                 line = line.substring(arg.length() + 2);
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
-                line = line.substring(arg.length() + 1);;
+                line = line.substring(arg.length() + 1);
+                commandArguments.add(arg);
+                return commandArguments;
             } else {
                 arg = line.replaceAll("\\s+", " ");
                 arg = simpleLine(arg);
