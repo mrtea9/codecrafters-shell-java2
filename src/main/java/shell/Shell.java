@@ -67,7 +67,11 @@ public class Shell {
                 arg = line.replaceAll("\\s+", " ");
             }
 
+            System.out.println("arg = " + arg);
+
             line = line.substring(arg.length());
+
+            if (line.charAt(0) == ' ') continue;
 
             System.out.println(arg);
             System.out.println(line);
