@@ -52,34 +52,54 @@ public class Shell {
     }
 
     public static String[] parse(String line) {
-
         var arguments = new ArrayList<String>();
-        String arg;
+        final var command = parseCommand(line);
+        line = line.substring(command.length() + 1);
 
-        while (!line.isEmpty()) {
-            if (line.startsWith("'")) {
-                arg = singleQuotes(line);
-                line = line.substring(arg.length() + 2);
-            } else if (line.startsWith("\"")) {
-                arg = doubleQuotes(line);
-                line = line.substring(arg.length() + 2);
-            } else if (line.contains("\\")) {
-                arg = blackSlash(line);
-            } else {
-                arg = line.replaceAll("\\s+", " ");
-                arg = simpleLine(arg);
-               // System.out.println(arg);
-               // System.out.println(line);
-                line = line.substring(arg.length() + 1);
-               // System.out.println(line);
-            }
+        final var commandArguments = parseArguments(line);
 
-            arguments.add(arg);
-        }
+        arguments.add(command);
+        arguments.add(commandArguments);
+
+        //System.out.println(arguments);
 
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
+    }
+
+    private static String parseArguments(String line) {
+        String commandArguments;
+
+        if (line.startsWith("'")) {
+            commandArguments = singleQuotes(line);
+        } else if (line.startsWith("\"")) {
+            commandArguments = doubleQuotes(line);
+        } else if (line.contains("\\")) {
+            commandArguments = blackSlash(line);
+        } else {
+            commandArguments = line.replaceAll("\\s+", " ");;
+        }
+
+        return commandArguments;
+    }
+
+    private static String parseCommand(String line) {
+        String command;
+
+        if (line.startsWith("'")) {
+            command = singleQuotes(line);
+        } else if (line.startsWith("\"")) {
+            command = doubleQuotes(line);
+        } else if (line.contains("\\")) {
+            command = blackSlash(line);
+        } else {
+            command = simpleLine(line);
+        }
+
+        //System.out.println(command);
+
+        return command;
     }
 
     private static String simpleLine(String message) {
