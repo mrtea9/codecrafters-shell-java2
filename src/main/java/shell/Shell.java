@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Shell {
@@ -59,26 +60,36 @@ public class Shell {
         final var commandArguments = parseArguments(line);
 
         arguments.add(command);
-        arguments.add(commandArguments);
+        arguments.addAll(commandArguments);
 
-        //System.out.println(arguments);
+        System.out.println(arguments);
 
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
     }
 
-    private static String parseArguments(String line) {
-        String commandArguments;
+    private static List<String> parseArguments(String line) {
+        String arg;
+        List<String> commandArguments = new ArrayList<>();
 
-        if (line.startsWith("'")) {
-            commandArguments = singleQuotes(line);
-        } else if (line.startsWith("\"")) {
-            commandArguments = doubleQuotes(line);
-        } else if (line.contains("\\")) {
-            commandArguments = blackSlash(line);
-        } else {
-            commandArguments = line.replaceAll("\\s+", " ");;
+        while (!line.isEmpty()) {
+            if (line.startsWith("'")) {
+                arg = singleQuotes(line);
+                line = line.substring(arg.length() + 2);
+            } else if (line.startsWith("\"")) {
+                arg = doubleQuotes(line);
+                line = line.substring(arg.length() + 2);
+            } else if (line.contains("\\")) {
+                arg = blackSlash(line);
+            } else {
+                arg = line.replaceAll("\\s+", " ");
+                arg = simpleLine(arg);
+                if (arg.length() == line.length()) line = line.substring(arg.length());
+                else line = line.substring(arg.length() +  1);
+            }
+
+            if (!arg.isEmpty()) commandArguments.add(arg);
         }
 
         return commandArguments;
@@ -127,7 +138,7 @@ public class Shell {
 
             if (startSingle && firstChar == '\'') {
                 startSingle = false;
-                continue;
+                return sb.toString();
             }
 
             if (firstChar == '\'') {
