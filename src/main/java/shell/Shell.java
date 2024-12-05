@@ -182,7 +182,8 @@ public class Shell {
             if (!startDouble && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
 
             if (startDouble && firstChar == '"') {
-                return sb.toString();
+                startDouble = false;
+                continue;
             }
 
             if (firstChar == '"') {
