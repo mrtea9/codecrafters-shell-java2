@@ -98,6 +98,7 @@ public class Shell {
     private static List<String> parseArguments(String line) {
         String arg;
         List<String> commandArguments = new ArrayList<>();
+        System.out.println(line);
 
         while (!line.isEmpty()) {
             if (line.startsWith("'")) {
@@ -105,7 +106,14 @@ public class Shell {
                 line = line.substring(arg.length() + 2);
             } else if (line.startsWith("\"")) {
                 arg = doubleQuotes(line);
-                line = line.substring(arg.length() + 2);
+                //System.out.println(arg);
+                //System.out.println(line);
+                long count = line.chars().filter(ch -> ch == '\\').count();
+                int delete = 2;
+                if (count != 0) {
+                    delete += (int) count / 2;
+                }
+                line = line.substring(arg.length() + delete);
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
                 commandArguments.add(arg);
