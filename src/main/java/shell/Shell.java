@@ -106,7 +106,7 @@ public class Shell {
                 line = line.substring(arg.length() + 2);
             } else if (line.startsWith("\"")) {
                 arg = doubleQuotes(line);
-                line = line.substring(arg.length() + delete);
+                line = line.substring(arg.length());
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
             } else {
