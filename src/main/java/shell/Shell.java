@@ -138,7 +138,6 @@ public class Shell {
             if (!startSingle && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
 
             if (startSingle && firstChar == '\'') {
-                startSingle = false;
                 return sb.toString();
             }
 
@@ -169,7 +168,6 @@ public class Shell {
             if (!startDouble && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
 
             if (startDouble && firstChar == '"') {
-                startDouble = false;
                 return sb.toString();
             }
 
