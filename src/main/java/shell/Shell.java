@@ -170,7 +170,7 @@ public class Shell {
 
             if (startDouble && firstChar == '"') {
                 startDouble = false;
-                continue;
+                return sb.toString();
             }
 
             if (firstChar == '"') {
