@@ -55,7 +55,11 @@ public class Shell {
     public static String[] parse(String line) {
         var arguments = new ArrayList<String>();
         final var command = parseCommand(line);
-        line = line.substring(command.length() + 1);
+        if (command.length() == line.length()) {
+            line = line.substring(command.length());
+        } else {
+            line = line.substring(command.length() + 1);
+        }
 
         final var commandArguments = parseArguments(line);
 
