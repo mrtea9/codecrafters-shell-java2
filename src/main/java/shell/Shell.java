@@ -111,9 +111,6 @@ public class Shell {
                 arg = blackSlash(line);
             } else {
                 arg = line.replaceAll("\\s+", " ");
-                arg = simpleLine(arg);
-                if (arg.length() == line.length()) line = line.substring(arg.length());
-                else line = line.substring(arg.length() +  1);
             }
 
         commandArguments.add(arg);
