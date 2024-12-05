@@ -123,12 +123,39 @@ public class Shell {
         if (line.startsWith("'")) {
             command = singleQuotes(line);
         } else if (line.startsWith("\"")) {
-            command = doubleQuotes(line);
+            command = doubleQuotesCommand(line);
         } else {
             command = simpleLine(line);
         }
 
         return command;
+    }
+
+    private static String doubleQuotesCommand(String message) {
+        StringBuilder sb = new StringBuilder();
+        boolean startDouble = false;
+
+        for (int i = 0; i < message.length(); i++) {
+            final var firstChar = message.charAt(i);
+
+            if (!startDouble && firstChar == ' ' && message.charAt(i + 1) == ' ') continue;
+
+            if (startDouble && firstChar == '"') {
+                startDouble = false;
+                continue;
+            }
+
+            if (firstChar == '"') {
+                startDouble = true;
+                continue;
+            }
+
+            if (!startDouble) continue;
+
+            sb.append(firstChar);
+        }
+
+        return sb.toString();
     }
 
     private static String simpleLine(String message) {
