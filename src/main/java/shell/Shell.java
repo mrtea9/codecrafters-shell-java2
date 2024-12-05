@@ -54,20 +54,23 @@ public class Shell {
     public static String[] parse(String line) {
 
         var arguments = new ArrayList<String>();
-        String arg = line;
+        String arg;
 
-        for (int i = 0; i < line.length(); i++) {
-            if (arg.startsWith("'")) {
-                arg = singleQuotes(arg);
-            } else if (arg.startsWith("\"")) {
-                arg = doubleQuotes(arg);
-            } else if (arg.contains("\\")) {
-                arg = blackSlash(arg);
+        while (!line.isEmpty()) {
+            if (line.startsWith("'")) {
+                arg = singleQuotes(line);
+            } else if (line.startsWith("\"")) {
+                arg = doubleQuotes(line);
+            } else if (line.contains("\\")) {
+                arg = blackSlash(line);
             } else {
-                arg = arg.replaceAll("\\s+", " ");
+                arg = line.replaceAll("\\s+", " ");
             }
 
+            line = line.substring(arg.length());
+
             System.out.println(arg);
+            System.out.println(line);
 
             arguments.add(arg);
         }
