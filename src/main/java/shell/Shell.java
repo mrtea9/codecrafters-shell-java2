@@ -65,16 +65,10 @@ public class Shell {
                 arg = blackSlash(line);
             } else {
                 arg = line.replaceAll("\\s+", " ");
+                arg = simpleLine(arg);
             }
 
-            System.out.println("arg = " + arg);
-
-            line = line.substring(arg.length());
-
-            if (line.charAt(0) == ' ') continue;
-
             System.out.println(arg);
-            System.out.println(line);
 
             arguments.add(arg);
         }
@@ -82,6 +76,21 @@ public class Shell {
         String[] result = new String[arguments.size()];
 
         return arguments.toArray(result);
+    }
+
+    private static String simpleLine(String message) {
+        StringBuilder sb = new StringBuilder();
+        boolean startSingle = false;
+
+        for (int i = 0; i < message.length(); i++) {
+            final var firstChar = message.charAt(i);
+
+            if (firstChar == ' ') return sb.toString();
+
+            sb.append(firstChar);
+        }
+
+        return sb.toString();
     }
 
     private static String singleQuotes(String message) {
@@ -95,7 +104,7 @@ public class Shell {
 
             if (startSingle && firstChar == '\'') {
                 startSingle = false;
-                return sb.toString();
+                continue;
             }
 
             if (firstChar == '\'') {
