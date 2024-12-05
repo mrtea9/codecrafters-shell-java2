@@ -100,24 +100,15 @@ public class Shell {
         List<String> commandArguments = new ArrayList<>();
         //System.out.println(line);
 
-        while (!line.isEmpty()) {
+
             if (line.startsWith("'")) {
                 arg = singleQuotes(line);
                 line = line.substring(arg.length() + 2);
             } else if (line.startsWith("\"")) {
                 arg = doubleQuotes(line);
-                //System.out.println(arg);
-                //System.out.println(line);
-                long count = line.chars().filter(ch -> ch == '\\').count();
-                int delete = 2;
-                if (count != 0) {
-                    delete += (int) count / 2;
-                }
                 line = line.substring(arg.length() + delete);
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
-                commandArguments.add(arg);
-                return commandArguments;
             } else {
                 arg = line.replaceAll("\\s+", " ");
                 arg = simpleLine(arg);
@@ -125,9 +116,7 @@ public class Shell {
                 else line = line.substring(arg.length() +  1);
             }
 
-            if (!arg.isEmpty()) commandArguments.add(arg);
-        }
-
+        commandArguments.add(arg);
         return commandArguments;
     }
 
