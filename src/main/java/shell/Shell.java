@@ -59,20 +59,18 @@ public class Shell {
         while (!line.isEmpty()) {
             if (line.startsWith("'")) {
                 arg = singleQuotes(line);
+                line = line.substring(arg.length() + 2);
             } else if (line.startsWith("\"")) {
                 arg = doubleQuotes(line);
+                line = line.substring(arg.length() + 2);
             } else if (line.contains("\\")) {
                 arg = blackSlash(line);
             } else {
                 arg = line.replaceAll("\\s+", " ");
                 arg = simpleLine(arg);
+                line = line.substring(arg.length() + 1);
             }
-
             System.out.println(arg);
-            System.out.println(line);
-
-            line = line.substring(arg.length() + 1);
-
             System.out.println(line);
 
             arguments.add(arg);
