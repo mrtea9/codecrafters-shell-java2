@@ -60,6 +60,8 @@ public class Shell {
 
         if (command.length() == line.length()) {
             line = line.substring(command.length());
+        } else if (line.startsWith("'") || line.startsWith("\"")) {
+            line = line.substring(command.length() + 2);
         } else {
             line = line.substring(command.length() + 1);
         }
