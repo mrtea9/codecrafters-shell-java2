@@ -70,6 +70,8 @@ public class Shell {
 
             System.out.println(arg);
 
+            line = line.substring(arg.length());
+
             arguments.add(arg);
         }
 
