@@ -64,10 +64,10 @@ public class Shell {
             line = line.substring(command.length() + 1);
         }
 
-        System.out.println(command.equals("cat") || command.length() > 6);
-
         final var commandArguments = (command.equals("cat") || command.length() > 6)
                 ? parseCatArguments(line) : parseArguments(line);
+
+        System.out.println(commandArguments);
 
         arguments.add(command);
         arguments.addAll(commandArguments);
