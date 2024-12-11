@@ -1,3 +1,4 @@
+import shell.LineParser;
 import shell.Shell;
 
 import java.util.NoSuchElementException;
@@ -27,7 +28,7 @@ public class Main {
     }
 
     public static void eval(Shell shell, String line) {
-        final var arguments = Shell.parse(line);
+        final var arguments = new LineParser(line).parse();
         final var program = arguments[0];
 
         final var command = shell.find(program);
