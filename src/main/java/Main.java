@@ -1,4 +1,5 @@
-import shell.LineParser;
+import io.RedirectStreams;
+import parse.LineParser;
 import shell.Shell;
 
 import java.util.NoSuchElementException;
@@ -28,12 +29,18 @@ public class Main {
     }
 
     public static void eval(Shell shell, String line) {
-        final var arguments = new LineParser(line).parse();
-        final var program = arguments[0];
+        final var parsedLine = new LineParser(line).parse();
 
-        final var command = shell.find(program);
+        final var arguments = parsedLine.arguments();
+        final var program = arguments.getFirst();
+
+        final var command = shell.find(program, false);
         if (command != null) {
-            command.execute(shell, arguments);
+            try (final var redirectStreams = RedirectStreams.from(parsedLine.redirects())) {
+                command.execute(shell, arguments, redirectStreams);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("%s: command not found".formatted(program));
         }

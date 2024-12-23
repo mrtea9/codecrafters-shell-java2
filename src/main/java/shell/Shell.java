@@ -23,9 +23,11 @@ public class Shell {
 
     private Path workingDirectory = Path.of(".").toAbsolutePath().normalize();
 
-    public Command find(String program) {
+    public Command find(String program, boolean isForType) {
         final var builtin = builtins.get(program);
-        if (builtin != null) return builtin;
+        if (builtin != null && (!isForType || builtin.acceptForType())) return builtin;
+
+        if (IS_WINDOWS) program = program.replace('\\', '/');
 
         final var separator = IS_WINDOWS ? ";" : ":";
         final var paths = System.getenv("PATH").split(separator);

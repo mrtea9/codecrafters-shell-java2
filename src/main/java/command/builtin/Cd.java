@@ -1,20 +1,22 @@
 package command.builtin;
 
 import command.Command;
+import io.RedirectStreams;
 import shell.Shell;
 
 import java.nio.file.Path;
+import java.util.List;
 
 public enum Cd implements Builtin {
 
     INSTANCE;
 
     @Override
-    public void execute(Shell shell, String[] arguments) {
-        final var path = arguments[1];
+    public void execute(Shell shell, List<String> arguments, RedirectStreams redirectStreams) {
+        final var path = arguments.get(1);
         final var absolute = toAbsolute(shell, path).normalize().toAbsolutePath();
 
-        if (!shell.changeWorkingDirectory(absolute)) System.out.println("cd: %s: No such file or directory".formatted(absolute));
+        if (!shell.changeWorkingDirectory(absolute)) redirectStreams.error().println("cd: %s: No such file or directory".formatted(absolute));
 
     }
 
