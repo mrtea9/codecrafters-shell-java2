@@ -59,5 +59,13 @@ public sealed interface RedirectStream extends AutoCloseable {
                 throw new RuntimeException(e);
             }
         }
+
+        public Path path() {
+            return path;
+        }
+
+        public boolean append() {
+            return append;
+        }
     }
 }
