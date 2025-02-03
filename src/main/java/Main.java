@@ -1,6 +1,8 @@
+import autocomplete.Autocompleter;
 import io.RedirectStreams;
 import parse.LineParser;
 import shell.Shell;
+import terminal.Termios;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -31,7 +33,13 @@ public class Main {
     }
 
     public static String read(Shell shell) {
+        final var autocompleter = new Autocompleter();
 
+        try (final var scope = Termios.enableRawMode()) {
+            prompt();
+
+
+        }
 
         return "";
     }
