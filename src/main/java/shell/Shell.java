@@ -21,6 +21,10 @@ public class Shell {
             "cd", Cd.INSTANCE
     );
 
+    public Map<String, Builtin> getBuiltins() {
+        return builtins;
+    }
+
     private Path workingDirectory = Path.of(".").toAbsolutePath().normalize();
 
     public Command find(String program, boolean isForType) {
@@ -50,5 +54,11 @@ public class Shell {
 
         workingDirectory = path;
         return true;
+    }
+
+    public String[] get$PATH() {
+        final var separator = IS_WINDOWS ? ";" : ":";
+
+        return System.getenv("PATH").split(separator);
     }
 }

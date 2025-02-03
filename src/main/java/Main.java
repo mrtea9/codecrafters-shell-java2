@@ -9,23 +9,31 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Shell shell = new Shell();
 
-        try (Scanner scanner = new Scanner(System.in)) {
-            while (true) {
-                final var line = read(scanner);
+        while (true) {
+            final var line = read(shell);
+
+            if (line == null) {
+                break;
+            } else if (line.isBlank()) {
+                continue;
+            } else {
                 eval(shell, line);
             }
-        } catch (NoSuchElementException e) {
-            System.out.println(e.getMessage());
         }
     }
 
-    public static String read(Scanner scanner) {
-        while (true) {
-            System.out.print("$ ");
-            final var line = scanner.nextLine();
+    public static void prompt() {
+        System.out.print("$ ");
+    }
 
-            if (!line.isEmpty()) return line;
-        }
+    public static void bell() {
+        System.out.print((char) 0x7);
+    }
+
+    public static String read(Shell shell) {
+
+
+        return "";
     }
 
     public static void eval(Shell shell, String line) {
