@@ -15,4 +15,5 @@ public class Autocompleter {
             BuiltinCompletionResolver.INSTANCE,
             ExecutableCompletionResolver.INSTANCE
     );
+
 }
