@@ -112,7 +112,6 @@ public class Main {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static void eval(Shell shell, String line) {
