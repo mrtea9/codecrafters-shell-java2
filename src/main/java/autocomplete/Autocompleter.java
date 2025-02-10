@@ -6,10 +6,7 @@ import lombok.Getter;
 import shell.Main;
 import shell.Shell;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Autocompleter {
@@ -42,6 +39,8 @@ public class Autocompleter {
             return Result.FOUND;
         }
 
+        final var prefix = findSharedPrefix(candidates);
+
         if (bellRang) {
             System.out.print(
                     candidates.stream()
@@ -56,6 +55,35 @@ public class Autocompleter {
         }
 
         return Result.MORE;
+    }
+
+    private static String findSharedPrefix(SequencedSet<String> candidates) {
+        final var first = candidates.getFirst();
+        if (first.isEmpty()) return "";
+
+        var end = 0;
+        for (; end < first.length(); end++) {
+            var oneIsNotMatching = false;
+
+            final var iterator = candidates.iterator();
+            iterator.next();
+
+            while (iterator.hasNext()) {
+                final var candidate = iterator.next();
+
+                if (!first.subSequence(0, end).equals(candidate.subSequence(0, end))) {
+                    oneIsNotMatching = true;
+                    break;
+                }
+            }
+
+            if (oneIsNotMatching) {
+                end -= 1;
+                break;
+            }
+        }
+
+        return first.substring(0, end);
     }
 
     private void writeCandidate(StringBuilder line, String candidate, boolean hasMore) {
