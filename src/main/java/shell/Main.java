@@ -67,6 +67,7 @@ public class Main {
                         switch (autocompleter.autocomplete(shell, line, bellRang)) {
                             case NONE -> {
                                 bellRang = false;
+                                System.out.println("none " + line);
                                 bell();
                             }
                             case FOUND -> {
@@ -75,6 +76,7 @@ public class Main {
                             }
                             case MORE -> {
                                 bellRang = true;
+                                System.out.println("more " + line);
                                 bell();
                             }
                         };

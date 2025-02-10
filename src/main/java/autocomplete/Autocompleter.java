@@ -21,6 +21,7 @@ public class Autocompleter {
 
     public Result autocomplete(Shell shell, StringBuilder line, boolean bellRang) {
         final var beginning = line.toString();
+        System.out.print("begin " + beginning);
         if (beginning.isBlank()) return Result.FOUND;
 
         final var candidates = resolvers.stream()
