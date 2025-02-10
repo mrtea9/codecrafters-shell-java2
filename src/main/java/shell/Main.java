@@ -64,6 +64,7 @@ public class Main {
                     }
 
                     case '\t': {
+                        System.out.println("sad");
                         switch (autocompleter.autocomplete(shell, line, bellRang)) {
                             case NONE -> {
                                 bellRang = false;
