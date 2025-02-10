@@ -37,7 +37,6 @@ public class Main {
 
         try (final var scope = Termios.enableRawMode()) {
             prompt();
-            System.out.println("este");
 
             var bellRang = false;
 
