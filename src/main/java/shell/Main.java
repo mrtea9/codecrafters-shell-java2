@@ -70,6 +70,7 @@ public class Main {
                                 bell();
                             }
                             case FOUND -> {
+                                System.out.println(line);
                                 bellRang = false;
                             }
                             case MORE -> {
