@@ -40,6 +40,11 @@ public class Autocompleter {
         }
 
         final var prefix = findSharedPrefix(candidates);
+        if (!prefix.isEmpty()) {
+            writeCandidate(line, prefix, true);
+
+            return Result.MORE;
+        }
 
         if (bellRang) {
             System.out.print(
