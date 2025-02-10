@@ -3,6 +3,7 @@ package autocomplete;
 import autocomplete.impl.BuiltinCompletionResolver;
 import autocomplete.impl.ExecutableCompletionResolver;
 import lombok.Getter;
+import shell.Main;
 import shell.Shell;
 
 import java.util.Comparator;
@@ -39,6 +40,19 @@ public class Autocompleter {
             writeCandidate(line, candidate, false);
 
             return Result.FOUND;
+        }
+
+        if (bellRang) {
+            System.out.print(
+                    candidates.stream()
+                            .map(beginning::concat)
+                            .collect(Collectors.joining(" ", "\n", "\n"))
+            );
+
+            Main.prompt();
+
+            System.out.print(beginning);
+            System.out.flush();
         }
 
         return Result.MORE;

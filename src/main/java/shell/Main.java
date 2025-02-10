@@ -1,12 +1,10 @@
+package shell;
+
 import autocomplete.Autocompleter;
 import io.RedirectStreams;
 import lombok.SneakyThrows;
 import parse.LineParser;
-import shell.Shell;
 import terminal.Termios;
-
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
