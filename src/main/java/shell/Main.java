@@ -114,7 +114,11 @@ public class Main {
                     }
                 }
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
+
+        return null;
     }
 
     public static void eval(Shell shell, String line) {
