@@ -42,7 +42,6 @@ public class Main {
 
             final var line = new StringBuilder();
             while (true) {
-                System.out.println("sad1");
                 final var input = System.in.read();
                 System.out.println("input " + input);
                 if (input == -1) return null;
