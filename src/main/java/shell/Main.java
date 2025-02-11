@@ -41,8 +41,8 @@ public class Main {
             var bellRang = false;
 
             final var line = new StringBuilder();
-            System.out.println("sad");
             while (true) {
+                System.out.println("sad1");
                 final var input = System.in.read();
                 System.out.println("input " + input);
                 if (input == -1) return null;
