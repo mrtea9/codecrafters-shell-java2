@@ -12,6 +12,7 @@ public class Main {
 
         while (true) {
             final var line = read(shell);
+            System.out.println("line " + line);
 
             if (line == null) {
                 break;
