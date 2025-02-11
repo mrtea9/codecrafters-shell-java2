@@ -108,6 +108,7 @@ public class Main {
                     default: {
                         line.append(character);
 
+                        System.out.print("sad2");
                         System.out.print(character);
 
                         break;
