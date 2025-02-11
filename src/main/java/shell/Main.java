@@ -37,11 +37,11 @@ public class Main {
 
         try (final var scope = Termios.enableRawMode()) {
             prompt();
-            System.out.println("sad");
 
             var bellRang = false;
 
             final var line = new StringBuilder();
+            System.out.println("sad");
             while (true) {
                 final var input = System.in.read();
                 System.out.println("input " + input);
