@@ -43,6 +43,7 @@ public class Main {
             final var line = new StringBuilder();
             while (true) {
                 final var input = System.in.read();
+                System.out.println("input " + input);
                 if (input == -1) return null;
                 System.out.println("csa");
 
