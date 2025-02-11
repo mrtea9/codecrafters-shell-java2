@@ -44,6 +44,7 @@ public class Main {
             while (true) {
                 final var input = System.in.read();
                 if (input == -1) return null;
+                System.out.println("csa");
 
                 final var character = (char) input;
                 System.out.println("char " + character);
