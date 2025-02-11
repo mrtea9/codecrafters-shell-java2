@@ -16,7 +16,7 @@ public class Termios implements AutoCloseable {
         termios.c_cc[LibC.VMIN] = 0;
         termios.c_cc[LibC.VTIME] = 1;
 
-        checkErrno(LibC.INSTANCE.tcsetattr(LibC.STDIN_FILENO, LibC.TCSANOW, previous));
+        checkErrno(LibC.INSTANCE.tcsetattr(LibC.STDIN_FILENO, LibC.TCSANOW, termios));
     }
 
     @Override

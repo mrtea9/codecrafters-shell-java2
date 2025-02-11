@@ -43,12 +43,11 @@ public class Main {
             final var line = new StringBuilder();
             while (true) {
                 final var input = System.in.read();
-                System.out.println("input " + input);
+
                 if (input == -1) return null;
-                System.out.println("csa");
+
 
                 final var character = (char) input;
-                System.out.println("char " + character);
                 switch (character) {
                     case 0x4: {
                         if (!line.isEmpty()) continue;
@@ -67,20 +66,16 @@ public class Main {
                     }
 
                     case '\t': {
-                        System.out.println("sad");
                         switch (autocompleter.autocomplete(shell, line, bellRang)) {
                             case NONE -> {
                                 bellRang = false;
-                                System.out.println("none " + line);
                                 bell();
                             }
                             case FOUND -> {
-                                System.out.println("found " + line);
                                 bellRang = false;
                             }
                             case MORE -> {
                                 bellRang = true;
-                                System.out.println("more " + line);
                                 bell();
                             }
                         };
@@ -108,7 +103,6 @@ public class Main {
                     default: {
                         line.append(character);
 
-                        System.out.print("sad2");
                         System.out.print(character);
 
                         break;
