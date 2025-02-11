@@ -35,6 +35,7 @@ public class Main {
     @SneakyThrows
     public static String read(Shell shell) {
         final var autocompleter = new Autocompleter();
+        System.out.println("d");
 
         try (final var scope = Termios.enableRawMode()) {
             prompt();
