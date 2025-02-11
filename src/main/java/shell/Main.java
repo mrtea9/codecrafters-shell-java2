@@ -37,6 +37,7 @@ public class Main {
 
         try (final var scope = Termios.enableRawMode()) {
             prompt();
+            System.out.println("sad");
 
             var bellRang = false;
 
