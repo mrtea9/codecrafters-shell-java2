@@ -12,7 +12,6 @@ public class Main {
 
         while (true) {
             final var line = read(shell);
-            System.out.println("line " + line);
 
             if (line == null) {
                 break;
@@ -35,7 +34,6 @@ public class Main {
     @SneakyThrows
     public static String read(Shell shell) {
         final var autocompleter = new Autocompleter();
-        System.out.println("d");
 
         try (final var scope = Termios.enableRawMode()) {
             prompt();
@@ -48,6 +46,7 @@ public class Main {
                 if (input == -1) return null;
 
                 final var character = (char) input;
+                System.out.println("char " + character);
                 switch (character) {
                     case 0x4: {
                         if (!line.isEmpty()) continue;
