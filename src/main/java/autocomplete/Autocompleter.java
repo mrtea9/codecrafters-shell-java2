@@ -51,7 +51,7 @@ public class Autocompleter {
             System.out.print(
                     candidates.stream()
                             .map(beginning::concat)
-                            .collect(Collectors.joining(" ", "\n", "\n"))
+                            .collect(Collectors.joining("  ", "\n", "\n"))
             );
 
             Main.prompt();
