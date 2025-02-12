@@ -76,7 +76,6 @@ public class Main {
                             }
                             case MORE -> {
                                 bellRang = true;
-                                System.out.print("line " + line);
                                 bell();
                             }
                         };
