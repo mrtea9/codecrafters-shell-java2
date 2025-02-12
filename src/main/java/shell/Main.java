@@ -75,7 +75,6 @@ public class Main {
                                 bellRang = false;
                             }
                             case MORE -> {
-
                                 bellRang = true;
                                 bell();
                             }
